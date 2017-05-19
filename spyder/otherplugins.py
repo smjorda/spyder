@@ -49,9 +49,11 @@ def _get_spyderplugins(plugin_path, is_io, modnames, modlist):
         return
 
     for name in os.listdir(plugin_path):
-        if is_io and not name.startswith(IO_PREFIX):
+        # Is this a Spyder plugin?
+        if not name.startswith(PLUGIN_PREFIX):
             continue
-        if not name.startswith(PLUGIN_PREFIX) or name.startswith(IO_PREFIX):
+        # Ensure right type of plugin
+        if is_io != name.startswith(IO_PREFIX):
             continue
 
         # Import the plugin
